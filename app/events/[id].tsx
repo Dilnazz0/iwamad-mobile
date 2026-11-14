@@ -1,6 +1,7 @@
 import { useLocalSearchParams, Stack } from 'expo-router';
 import { View, Text, StyleSheet, ActivityIndicator, Pressable } from 'react-native';
 import { useEvents } from '../../src/hooks/useEvents';
+import { HolidayNote } from '../../src/components/HolidayNote';
 
 export default function EventDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -20,8 +21,8 @@ export default function EventDetailScreen() {
       <View style={styles.center}>
         <Text style={styles.errorTitle}>Could not load events</Text>
         <Text style={styles.text}>{error.message}</Text>
-        <Pressable 
-          style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} 
+        <Pressable
+          style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
           onPress={() => refetch()}
         >
           {isRefetching ? (
@@ -54,7 +55,10 @@ export default function EventDetailScreen() {
         <Text style={styles.title}>{event.title}</Text>
         <View style={styles.infoRow}>
           <Text style={styles.label}>Date:</Text>
-          <Text style={styles.value}>{event.date}</Text>
+          <View style={styles.valueContainer}>
+            <Text style={styles.value}>{event.date}</Text>
+            <HolidayNote date={event.date} />
+          </View>
         </View>
         <View style={styles.infoRow}>
           <Text style={styles.label}>Place:</Text>
@@ -119,10 +123,12 @@ const styles = StyleSheet.create({
     width: 70,
     fontSize: 16,
   },
+  valueContainer: {
+    flex: 1,
+  },
   value: {
     fontSize: 16,
     color: '#111827',
-    flex: 1,
   },
   errorTitle: {
     fontSize: 20,
