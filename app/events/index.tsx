@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { View, Text, FlatList, TextInput, StyleSheet, ActivityIndicator, Pressable } from 'react-native';
 import { router } from 'expo-router';
 import { useEvents } from '../../src/hooks/useEvents';
+import { useSavedIds } from '../../src/hooks/useSavedIds';
 import { EventRow } from '../../src/components/EventRow';
 
 export default function EventsScreen() {
-  const [savedIds, setSavedIds] = useState<number[]>([]);
+  const { savedIds, toggleSaved } = useSavedIds();
   const [search, setSearch] = useState('');
   const { data, isPending, isError, error, refetch, isRefetching } = useEvents();
 
@@ -23,8 +24,8 @@ export default function EventsScreen() {
       <View style={styles.center}>
         <Text style={styles.errorTitle}>Could not load events</Text>
         <Text style={styles.text}>{error.message}</Text>
-        <Pressable 
-          style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} 
+        <Pressable
+          style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
           onPress={() => refetch()}
         >
           {isRefetching ? (
@@ -41,16 +42,10 @@ export default function EventsScreen() {
     e.title.toLowerCase().includes(search.toLowerCase())
   );
 
-  const toggleSave = (id: number) => {
-    setSavedIds((ids) =>
-      ids.includes(id) ? ids.filter((i) => i !== id) : [...ids, id]
-    );
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.hint}>
-        Long-press an event to save it. Saved: {savedIds.length}
+        Swipe or long-press an event to save it. Saved: {savedIds.length}
       </Text>
       <TextInput
         style={styles.search}
@@ -66,7 +61,7 @@ export default function EventsScreen() {
             event={item}
             isSaved={savedIds.includes(item.id)}
             onPress={() => router.push(`/events/${item.id}`)}
-            onLongPress={() => toggleSave(item.id)}
+            onToggleSaved={() => toggleSaved(item.id)}
           />
         )}
         ListEmptyComponent={<Text style={styles.empty}>No events match</Text>}
