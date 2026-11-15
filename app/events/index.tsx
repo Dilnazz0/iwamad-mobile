@@ -43,40 +43,48 @@ export default function EventsScreen() {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.hint}>
-        Swipe or long-press an event to save it. Saved: {savedIds.length}
-      </Text>
-      <TextInput
-        style={styles.search}
-        placeholder="Search events"
-        value={search}
-        onChangeText={setSearch}
-      />
-      <FlatList
-        data={filteredEvents}
-        keyExtractor={(e) => String(e.id)}
-        renderItem={({ item }) => (
-          <EventRow
-            event={item}
-            isSaved={savedIds.includes(item.id)}
-            onPress={() => router.push(`/events/${item.id}`)}
-            onToggleSaved={() => toggleSaved(item.id)}
-          />
-        )}
-        ListEmptyComponent={<Text style={styles.empty}>No events match</Text>}
-        refreshing={isRefetching}
-        onRefresh={() => refetch()}
-      />
+    <View style={styles.screen}>
+      <View style={styles.container}>
+        <Text style={styles.hint}>
+          Swipe or long-press an event to save it. Saved: {savedIds.length}
+        </Text>
+        <TextInput
+          style={styles.search}
+          placeholder="Search events"
+          value={search}
+          onChangeText={setSearch}
+        />
+        <FlatList
+          data={filteredEvents}
+          keyExtractor={(e) => String(e.id)}
+          renderItem={({ item }) => (
+            <EventRow
+              event={item}
+              isSaved={savedIds.includes(item.id)}
+              onPress={() => router.push(`/events/${item.id}`)}
+              onToggleSaved={() => toggleSaved(item.id)}
+            />
+          )}
+          ListEmptyComponent={<Text style={styles.empty}>No events match</Text>}
+          refreshing={isRefetching}
+          onRefresh={() => refetch()}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: '#f9fafb',
+  },
   container: {
     flex: 1,
+    width: '100%',
+    maxWidth: 680,
+    alignSelf: 'center',
     padding: 16,
-    backgroundColor: '#f9fafb',
   },
   center: {
     flex: 1,

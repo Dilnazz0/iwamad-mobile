@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
   swipeContainer: {
     borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: '#7c3aed',
   },
   card: {
     padding: 20,
@@ -76,11 +75,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#f3f4f6',
+    borderColor: '#e5e7eb',
   },
   cardPressed: {
     backgroundColor: '#f3f0ff',
-    transform: [{ scale: 0.98 }],
+    transform: [{ scale: 0.99 }],
   },
   title: {
     fontSize: 18,
@@ -102,7 +101,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#7c3aed',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 90,
+    width: 106,
+    marginLeft: -16,
+    paddingLeft: 16,
     minHeight: 44,
   },
   actionText: {
