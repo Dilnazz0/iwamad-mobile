@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Mountain Picnic & Games",
+    "date": "2027-10-20",
+    "place": "Dynasty Alma-Arasan",
+    "seats": 30
+  },
+  {
+    "id": 2,
+    "title": "Theater Trip: Artishok",
+    "date": "2026-03-08",
+    "place": "Artishok Theater",
+    "seats": 15
+  },
+  {
+    "id": 3,
+    "title": "Board Game Tournament",
+    "date": "2027-10-22",
+    "place": "Coworking Area Halyk, KBTU",
+    "seats": 3
+  },
+  {
+    "id": 4,
+    "title": "Evening Movie & Pizza Night",
+    "date": "2027-10-30",
+    "place": "Independence Hall, KBTU",
+    "seats": 25
+  }
+]
